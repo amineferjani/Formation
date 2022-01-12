@@ -1,38 +1,46 @@
 
 package com.mycompany.mavenproject2;
 
-public class Compte {
-    private int code;
-    private double solde;
-    private static int nbrCompte=0;
+import java.io.Serializable;
 
-    Compte(double s){
-        code=nbrCompte+1;
-        solde=s;
-        nbrCompte++;
-    }
+public abstract class Compte implements Serializable {
+
 
     public Compte() {
     }
-    
-    public void verser(double mt){
-        solde+=mt;//solde=solde+mt;
+
+    protected int code;
+    protected float solde;
+    private static int nbCompte;
+
+    public Compte(float solde) {
+        nbCompte++;
+        this.code = nbCompte;
+        this.solde = solde;
     }
-    public void retirer(double mt){
-        solde-=mt;//solde=solde-mt;
+
+    public void verser(float mt){
+        solde+=mt;
     }
-public void afficher (){
-    System.out.println("Code : "+code+" ; Solde : "+solde);
-}
+
+    public void retirer(float mt){
+        if(mt<solde)
+            solde-=mt;
+    }
+    public abstract String afficher();
+
+
     public int getCode() {
         return code;
     }
 
-    public double getSolde() {
+    public float getSolde() {
         return solde;
     }
 
-    public static int getNbrCompte() {
-        return nbrCompte;
-    }    
+    public static int getNbCompte() {
+        return nbCompte;
+    }
+
 }
+
